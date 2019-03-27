@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+ 
+{% block title %}
+Listagem de Carros
+{% endblock title %}
+ 
+{% block content %}
+<form method="GET">
+    <input type="text" name="busca" placeholder="Digite sua busca">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+ 
+<table class="table">
+      <thead>
+            <tr>
+                  <th>Nome</th>
+                  <th>Descrição</th>
+                  <th>Quantidade</th>
+                  <th>Data colheita</th>
+                </tr>
+          </thead>
+      <tbody>
+          {% for produto in lista %}
+            <tr>
+                  <td >{{ produto.nome }}</td>
+                  <td>{{ produto.descricao }}</td>
+                  <td>{{ produto.quantidade }}</td>
+                  <td>{{ produto.data_colheita }}</td>
+                  <td>
+                        <a href="{% url 'editar_produto' pk=produto.pk %}">
+                          <i class="material-icons">mode_edit</i>
+                            </a>
+                        <a href="{% url 'remover_produto' pk=produto.pk %}">
+                          <i class="material-icons">delete</i>
+                            </a>
+                      </td>
+             
+                </tr>
+          {% endfor %}
+          </tbody>
+</table>
+<a href="{% url 'cadastrar_produto' %}">
+    <button type="submit" class="btn btn-primary">
+            Cadastrar
+    </button>
+</a>
+ 
+{% endblock content %}
